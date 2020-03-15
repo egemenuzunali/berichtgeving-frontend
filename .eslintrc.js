@@ -3,7 +3,12 @@ module.exports = {
 		browser: true,
 		es6: true,
 	},
-	extends: ['eslint:recommended', 'plugin:react/recommended'],
+	extends: [
+		'eslint:recommended',
+		'plugin:react/recommended',
+		'prettier',
+		'prettier/react',
+	],
 	globals: {
 		Atomics: 'readonly',
 		SharedArrayBuffer: 'readonly',
@@ -15,9 +20,12 @@ module.exports = {
 		ecmaVersion: 2018,
 		sourceType: 'module',
 	},
-	plugins: ['react'],
+	plugins: ['react', 'prettier'],
 	rules: {},
 	globals: {
 		process: 'readonly',
+	},
+	rules: {
+		'prettier/prettier': 'error',
 	},
 };

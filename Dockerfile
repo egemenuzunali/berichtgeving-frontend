@@ -10,5 +10,5 @@ COPY src /app/src
 COPY public /app/public
 
 RUN npm run build
-EXPOSE 3000
-CMD serve -s build
+EXPOSE 3001
+CMD serve -p 3001 -s build

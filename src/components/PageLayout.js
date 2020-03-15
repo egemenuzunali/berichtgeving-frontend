@@ -45,7 +45,7 @@ const PageLayOut = ({ children, location: { pathname } }) => {
 };
 
 PageLayOut.propTypes = {
-	children: PropTypes.array.isRequired,
+	children: PropTypes.object.isRequired,
 	location: PropTypes.object.isRequired,
 	pathname: PropTypes.string.isRequired,
 };

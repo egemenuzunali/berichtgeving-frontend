@@ -5,7 +5,6 @@ import { endpoint, prodEndpoint } from './config';
 
 const link = createHttpLink({
 	uri: process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
-	credentials: 'include',
 });
 
 function createClient() {

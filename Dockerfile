@@ -1,11 +1,10 @@
 FROM node:10
 WORKDIR /app
-RUN npm install -g yarn
 COPY package.json /app/package.json
 COPY yarn.lock /app/yarn.lock
 
-RUN npm install
-RUN npm install -g serve
+RUN yarn install
+RUN yarn global add serve
 
 COPY src /app/src
 COPY public /app/public

@@ -1,15 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider, CssBaseline } from '@material-ui/core';
+import { ApolloProvider } from '@apollo/react-hooks';
 import App from './app/App';
 import * as serviceWorker from './serviceWorker';
 import theme from './lib/theme';
+import createClient from './lib/withData';
+
+const client = createClient();
 
 ReactDOM.render(
-	<ThemeProvider theme={theme}>
-		<CssBaseline />
-		<App />
-	</ThemeProvider>,
+	<ApolloProvider client={client}>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<App />
+		</ThemeProvider>
+	</ApolloProvider>,
 	document.getElementById('root')
 );
 

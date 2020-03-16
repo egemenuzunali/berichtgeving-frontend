@@ -28,4 +28,4 @@ steps:
     repository: 'berichtgeving / berichtgeving-frontend'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
-    tags: 'berichtgeving-frontend-$(Build.BuildId)'
+    tags: '$(Build.BuildId)'

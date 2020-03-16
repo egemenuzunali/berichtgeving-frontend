@@ -9,6 +9,7 @@ import {
 	Select,
 	MenuItem,
 	InputLabel,
+	Grid,
 } from '@material-ui/core/';
 import { useQuery } from '@apollo/react-hooks';
 import Avatar from '@material-ui/core/Avatar';
@@ -71,40 +72,46 @@ const Home = () => {
 
 	return (
 		<Paper elevation={0}>
-			<FormControl fullWidth>
-				<InputLabel>Kies cluster</InputLabel>
-				<Select
-					labelId="demo-simple-select-label"
-					id="demo-simple-select"
-					value={state.cluster}
-					onChange={handleChange('cluster')}
-					color="secondary"
-				>
-					{data &&
-						data.getAllClusters.map((cluster) => (
-							<MenuItem value={cluster.id} key={cluster.description}>
-								{cluster.description}
-							</MenuItem>
-						))}
-				</Select>
-			</FormControl>
+			<Grid container spacing={5}>
+				<Grid item xs={6}>
+					<FormControl fullWidth>
+						<InputLabel>Kies cluster</InputLabel>
+						<Select
+							labelId="demo-simple-select-label"
+							id="demo-simple-select"
+							value={state.cluster}
+							onChange={handleChange('cluster')}
+							color="secondary"
+						>
+							{data &&
+								data.getAllClusters.map((cluster) => (
+									<MenuItem value={cluster.id} key={cluster.description}>
+										{cluster.description}
+									</MenuItem>
+								))}
+						</Select>
+					</FormControl>
+					<FormControl fullWidth>
+						<InputLabel>Kies Directie</InputLabel>
+						<Select
+							labelId="demo-simple-select-label"
+							id="demo-simple-select"
+							value={state.direction}
+							onChange={handleChange('direction')}
+							color="secondary"
+							disabled={!state.cluster}
+						>
+							{state.cluster && renderDirectionItems()}
+						</Select>
+					</FormControl>
+				</Grid>
 
-			<FormControl fullWidth>
-				<InputLabel>Kies Directie</InputLabel>
-				<Select
-					labelId="demo-simple-select-label"
-					id="demo-simple-select"
-					value={state.direction}
-					onChange={handleChange('direction')}
-					color="secondary"
-					disabled={!state.cluster}
-				>
-					{state.cluster && renderDirectionItems()}
-				</Select>
-			</FormControl>
-			<List dense>
-				{state.cluster && state.direction && renderCoreProcesses()}
-			</List>
+				<Grid item xs={6}>
+					<List dense>
+						{state.cluster && state.direction && renderCoreProcesses()}
+					</List>
+				</Grid>
+			</Grid>
 		</Paper>
 	);
 };

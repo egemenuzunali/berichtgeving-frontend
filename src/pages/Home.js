@@ -78,8 +78,6 @@ const Home = () => {
 					<FormControl fullWidth>
 						<InputLabel>Kies Cluster</InputLabel>
 						<Select
-							labelId="demo-simple-select-label"
-							id="demo-simple-select"
 							value={state.cluster}
 							onChange={handleChange('cluster')}
 							color="secondary"
@@ -95,8 +93,6 @@ const Home = () => {
 					<FormControl fullWidth>
 						<InputLabel>Kies Directie</InputLabel>
 						<Select
-							labelId="demo-simple-select-label"
-							id="demo-simple-select"
 							value={state.direction}
 							onChange={handleChange('direction')}
 							color="secondary"

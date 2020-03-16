@@ -10,6 +10,7 @@ import {
 	MenuItem,
 	InputLabel,
 	Grid,
+	Typography,
 } from '@material-ui/core/';
 import { useQuery } from '@apollo/react-hooks';
 import Avatar from '@material-ui/core/Avatar';
@@ -75,7 +76,7 @@ const Home = () => {
 			<Grid container spacing={5}>
 				<Grid item xs={6}>
 					<FormControl fullWidth>
-						<InputLabel>Kies cluster</InputLabel>
+						<InputLabel>Kies Cluster</InputLabel>
 						<Select
 							labelId="demo-simple-select-label"
 							id="demo-simple-select"
@@ -105,12 +106,13 @@ const Home = () => {
 						</Select>
 					</FormControl>
 				</Grid>
-
-				<Grid item xs={6}>
-					<List dense>
-						{state.cluster && state.direction && renderCoreProcesses()}
-					</List>
-				</Grid>
+				{state.cluster && state.direction ? (
+					<Grid item xs={6}>
+						<List dense>{renderCoreProcesses()}</List>
+					</Grid>
+				) : (
+					<Typography>Selecteer een Cluster en een Directie</Typography>
+				)}
 			</Grid>
 		</Paper>
 	);

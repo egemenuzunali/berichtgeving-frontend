@@ -22,7 +22,7 @@ const INITIAL_STATE = {
 	direction: '',
 };
 
-const Home = () => {
+const Home = ({ history }) => {
 	const [state, setState] = React.useState({ ...INITIAL_STATE });
 	const { loading, error, data } = useQuery(GET_CLUSTERS);
 
@@ -57,7 +57,13 @@ const Home = () => {
 			(direction) => direction.id === state.direction
 		);
 		return selectedDirection[0].coreProcesses.map((process) => (
-			<ListItem key={process.id} button>
+			<ListItem
+				key={process.id}
+				button
+				onClick={() => {
+					history.push('/form');
+				}}
+			>
 				<ListItemAvatar>
 					<Avatar>
 						<FolderIcon />

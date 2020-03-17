@@ -16,6 +16,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Avatar from '@material-ui/core/Avatar';
 import FolderIcon from '@material-ui/icons/Folder';
 import GET_CLUSTERS from '../lib/Queries/getClusters';
+import PleaseSignIn from '../components/PleaseSignIn';
 
 const INITIAL_STATE = {
 	cluster: '',
@@ -78,45 +79,47 @@ const Home = ({ history }) => {
 	};
 
 	return (
-		<Paper elevation={0}>
-			<Grid container spacing={5}>
-				<Grid item xs={6}>
-					<FormControl fullWidth>
-						<InputLabel>Kies Cluster</InputLabel>
-						<Select
-							value={state.cluster}
-							onChange={handleChange('cluster')}
-							color="secondary"
-						>
-							{data &&
-								data.getAllClusters.map((cluster) => (
-									<MenuItem value={cluster.id} key={cluster.description}>
-										{cluster.description}
-									</MenuItem>
-								))}
-						</Select>
-					</FormControl>
-					<FormControl fullWidth>
-						<InputLabel>Kies Directie</InputLabel>
-						<Select
-							value={state.direction}
-							onChange={handleChange('direction')}
-							color="secondary"
-							disabled={!state.cluster}
-						>
-							{state.cluster && renderDirectionItems()}
-						</Select>
-					</FormControl>
-				</Grid>
-				{state.cluster && state.direction ? (
+		<PleaseSignIn>
+			<div>
+				<Grid container spacing={5}>
 					<Grid item xs={6}>
-						<List dense>{renderCoreProcesses()}</List>
+						<FormControl fullWidth>
+							<InputLabel>Kies Cluster</InputLabel>
+							<Select
+								value={state.cluster}
+								onChange={handleChange('cluster')}
+								color="secondary"
+							>
+								{data &&
+									data.getAllClusters.map((cluster) => (
+										<MenuItem value={cluster.id} key={cluster.description}>
+											{cluster.description}
+										</MenuItem>
+									))}
+							</Select>
+						</FormControl>
+						<FormControl fullWidth>
+							<InputLabel>Kies Directie</InputLabel>
+							<Select
+								value={state.direction}
+								onChange={handleChange('direction')}
+								color="secondary"
+								disabled={!state.cluster}
+							>
+								{state.cluster && renderDirectionItems()}
+							</Select>
+						</FormControl>
 					</Grid>
-				) : (
-					<Typography>Selecteer een Cluster en een Directie</Typography>
-				)}
-			</Grid>
-		</Paper>
+					{state.cluster && state.direction ? (
+						<Grid item xs={6}>
+							<List dense>{renderCoreProcesses()}</List>
+						</Grid>
+					) : (
+						<Typography>Selecteer een Cluster en een Directie</Typography>
+					)}
+				</Grid>
+			</div>
+		</PleaseSignIn>
 	);
 };
 

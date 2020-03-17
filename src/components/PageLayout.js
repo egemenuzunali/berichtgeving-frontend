@@ -9,6 +9,7 @@ import gemeenteAmsterdamLogo from '../assets/gemeenteAmsterdam.png';
 
 const useStyles = makeStyles({
 	mainContainer: {
+		paddingTop: '3rem',
 		paddingBottom: '6rem',
 		height: '100%',
 	},

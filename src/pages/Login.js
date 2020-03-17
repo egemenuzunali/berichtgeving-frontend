@@ -33,16 +33,26 @@ const Login = (props) => {
 		validationSchema: LoginFormSchema,
 		onSubmit: async (values) => {
 			try {
-				await signIn({
-					variables: values,
+				const dataSign = await signIn({
+					variables: {
+						username: values.email,
+						password: values.password,
+					},
 					refetchQueries: [
 						{
 							query: CURRENT_USER_QUERY,
 						},
 					],
 				});
+				const {
+					data: {
+						signIn: { token },
+					},
+				} = dataSign;
+				localStorage.setItem('token', token);
+				props.history.push('/');
 			} catch (err) {
-				formik.setFieldError('general', err);
+				console.log(err);
 			}
 		},
 	});
@@ -56,14 +66,12 @@ const Login = (props) => {
 					<FormikErrorMssg error={formik.errors.general} />
 					<FormikTextField
 						type="email"
-						formik
 						name="email"
 						label="Email"
 						formik={formik}
 					/>
 					<FormikTextField
 						type="password"
-						formik
 						name="password"
 						label="Password"
 						formik={formik}

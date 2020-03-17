@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const INITIAL_STATE = {
-	email: '',
+	username: '',
 	password: '',
 };
 
@@ -56,8 +56,27 @@ const SignIn = ({ history }) => {
 				method="post"
 				onSubmit={async (e) => {
 					e.preventDefault();
-					await signIn();
-					setState({ password: '', email: '' });
+					try {
+						const dataSign = await signIn({
+							variables: {
+								...state,
+							},
+							refetchQueries: [
+								{
+									query: CURRENT_USER_QUERY,
+								},
+							],
+						});
+						const {
+							data: {
+								signIn: { token },
+							},
+						} = dataSign;
+						localStorage.setItem('token', token);
+						setState({ password: '', username: '' });
+					} catch (error) {
+						console.log(error);
+					}
 				}}
 			>
 				<fieldset
@@ -68,12 +87,12 @@ const SignIn = ({ history }) => {
 					<Typography variant="h6">Inloggen</Typography>
 					<Error error={error} />
 					<TextField
-						id="email"
-						label="email"
-						type="email"
-						name="email"
-						htmlFor="email"
-						value={state.email}
+						id="username"
+						label="username"
+						type="username"
+						name="username"
+						htmlFor="username"
+						value={state.username}
 						onChange={saveToState}
 						margin="normal"
 					/>

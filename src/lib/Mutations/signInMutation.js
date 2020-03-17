@@ -1,11 +1,12 @@
 import gql from 'graphql-tag';
 
 const SIGNIN_MUTATION = gql`
-	mutation SIGNIN_MUTATION($email: String!, $password: String!) {
-		signIn(email: $email, password: $password) {
-			id
-			email
-			name
+	mutation SIGNIN_MUTATION($username: String!, $password: String!) {
+		signIn(username: $username, password: $password) {
+			user {
+				fullName
+			}
+			token
 		}
 	}
 `;

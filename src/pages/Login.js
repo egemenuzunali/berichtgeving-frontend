@@ -25,6 +25,12 @@ const Login = (props) => {
 	const { loading, error, data } = useQuery(CURRENT_USER_QUERY);
 	const [signIn] = useMutation(SIGNIN_MUTATION);
 
+	React.useEffect(() => {
+		if (data && data.getCurrentUser) {
+			props.history.push('/');
+		}
+	}, [data]);
+
 	const formik = useFormik({
 		initialValues: {
 			email: '',
